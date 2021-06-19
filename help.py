@@ -31,12 +31,12 @@ disponibles en el bot
                     
                     embed.description = """
 **Comando de ayuda de** [Voiddy](https://discord.com/api/oauth2/authorize?client_id=854166740498251777&permissions=8&scope=bot)
+**Prefix:** **``=``**
 
 :penguin: ── **Utilidad**
-**``ping``** **``help``** **``hex``** **``base64``** **``phone``** **``qr_make``** **``qr_read``**
-                    """
-                    
-                    
+**``ping``** **``help``** **``hex``** **``base85``** **``encrypt``** **``base64``** **``phone``** **``qr_make``** **``qr_read``** 
+**``sha1``** **``sha256``** **``sha512``**
+                    """    
                
                elif command != '':
                     if command in [command.name.lower() for command in self.bot.commands]:

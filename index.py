@@ -23,6 +23,8 @@ cogList = [
 #    Comandos       #
 #    Utilidad
      "help",
+     "commands.utils.encrypt",
+     "commands.utils.sha",
      "commands.utils.base64",
      "commands.utils.base85",
      "commands.utils.hex",
@@ -51,7 +53,11 @@ if __name__ == "__main__":
      
 #    Carga todas las extensiones
      for cog in cogList:
-          client.load_extension(name=cog)
+          try:
+               client.load_extension(name=cog)
 
+          except Exception as e:
+               exc = f"{type(e).__name__} : {e}"
+          
 #    Carga el token del bot
      client.run(token)
