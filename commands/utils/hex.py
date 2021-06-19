@@ -10,7 +10,7 @@ class Hex(commands.Cog):
           """
 Codifica en hexadecimal el texto que el usuario diga
 
-**Sintaxis:** **``thex <texto>``**
+**Sintaxis:** **``=hex <texto>``**
           """
           ntext = text.encode('utf-8')
           
@@ -32,7 +32,8 @@ Codifica en hexadecimal el texto que el usuario diga
                ,inline=False
           )
           
-          await ctx.reply(embed = embed)
+          await ctx.reply(embed = embed,
+                          mention_author=False)
 
 def setup(bot):
      bot.add_cog(Hex(bot))

@@ -1,9 +1,11 @@
 from discord.ext import commands
 from discord import Embed, Intents
 
+VERSION = "1.0.0"
+
 it = Intents().all()
 
-client = commands.Bot(command_prefix=commands.when_mentioned_or("t", "t/"),
+client = commands.Bot(command_prefix=commands.when_mentioned_or("="),
                       help_command=None,
                       description="Bot mas troll que conocerás",
                       intents=it)
@@ -17,9 +19,12 @@ cogList = [
 #    Utilidad
      "help",
      "commands.utils.base64",
+     "commands.utils.base85",
      "commands.utils.hex",
      "commands.utils.phone",
-     "commands.utils.whois"
+     "commands.utils.whois",
+     "commands.utils.qr",
+     "commands.utils.info"
 ]
 
 @client.command()
@@ -27,7 +32,7 @@ async def ping(ctx : commands.Context):
      """
 *Devuelve el ping del bot*
 
-**Sintaxis:** **``tping``**
+**Sintaxis:** **``=ping``**
      """
      embed = Embed(title="Ping de trollencio",
                    description="**{0:.2f}ms**".format(client.latency*1000),color=ctx.author.color)

@@ -14,7 +14,7 @@ class Whois(commands.Cog):
           """
 Muestra información detallada de una dirección ip
 
-**Sintaxis:** **``twhois <dirección ip>``**
+**Sintaxis:** **``=whois <dirección ip>``**
           """
           try:
                site= f"https://ipinfo.io/{ip}/json"

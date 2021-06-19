@@ -11,7 +11,7 @@ class Base64(commands.Cog):
           """
 Codifica en base64 el texto que el usuario diga
 
-**Sintaxis:** **``tbase64 <texto>``**
+**Sintaxis:** **``=base64 <texto>``**
           """
           bytes = text.encode("utf-8")
           
@@ -24,19 +24,14 @@ Codifica en base64 el texto que el usuario diga
           )
           
           embed.add_field(
-               name=f"Texto sin codificar",
-               value=f"``{text}``",
-               inline=False
-          )
-          
-          embed.add_field(
                name=f"Texto codificado",
                value=f"``{base64_string}``",
                inline=False
           )
           
           
-          await ctx.reply(embed = embed)
+          await ctx.reply(embed = embed,
+                          mention_author=False)
           
 def setup(bot):
      bot.add_cog(Base64(bot=bot))

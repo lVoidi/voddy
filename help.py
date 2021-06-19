@@ -30,10 +30,10 @@ disponibles en el bot
                if command=='':
                     
                     embed.description = """
-**Comando de ayuda de** [trollencio](https://discord.com/api/oauth2/authorize?client_id=850068845216399470&permissions=8&scope=bot)
+**Comando de ayuda de** [Voiddy](https://discord.com/api/oauth2/authorize?client_id=854166740498251777&permissions=8&scope=bot)
 
-<:trollcoin:850173125114200094> ── **Utilidad**
-**``ping``** **``help``** **``hex``** **``base64``** **``phone``**
+:penguin: ── **Utilidad**
+**``ping``** **``help``** **``hex``** **``base64``** **``phone``** **``qr_make``** **``qr_read``**
                     """
                     
                     

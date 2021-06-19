@@ -12,7 +12,7 @@ class Phone(commands.Cog):
           """
           
 Genera números de telefonos de distintos paises
-**Sintaxis:** **``tphone <pais>``**
+**Sintaxis:** **``=phone <pais>``**
 
           """
           if country in self.methods.countries_list:

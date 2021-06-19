@@ -1,15 +1,10 @@
-import qrcode
+#http://api.qrserver.com/v1/read-qr-code/?fileurl=
 
+from urllib import parse, request
+from json import loads
 
-qr = qrcode.QRCode(
-    version=1,
-    error_correction=qrcode.constants.ERROR_CORRECT_L,
-    box_size=10,
-    border=4,
-)
-qr.add_data('Some data')
-qr.make(fit=True)
+enc = parse.urlencode({"" : "https://media.discordapp.net/attachments/844755531049467915/855601044410728478/SPOILER_431590024559984641.png"})
 
-img = qr.make_image(fill_color="black", back_color="white")
-
-img.save("que.png", format="png")
+response = request.urlopen("http://api.qrserver.com/v1/read-qr-code/?fileurl{}".format(enc))
+s = loads(response.read())
+print(s)
