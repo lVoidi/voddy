@@ -25,6 +25,7 @@ cogList = [
      "help",
      "commands.utils.encrypt",
      "commands.utils.sha",
+     "commands.utils.md5",
      "commands.utils.base64",
      "commands.utils.base85",
      "commands.utils.hex",

@@ -35,7 +35,7 @@ disponibles en el bot
 
 :penguin: ── **Utilidad**
 **``ping``** **``help``** **``hex``** **``base85``** **``encrypt``** **``base64``** **``phone``** **``qr_make``** **``qr_read``** 
-**``sha1``** **``sha256``** **``sha512``**
+**``sha1``** **``sha256``** **``sha512``** **``md5``**
                     """    
                
                elif command != '':
