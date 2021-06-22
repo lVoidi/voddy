@@ -33,9 +33,17 @@ disponibles en el bot
 **Comando de ayuda de** [Voiddy](https://discord.com/api/oauth2/authorize?client_id=854166740498251777&permissions=8&scope=bot)
 **Prefix:** **``=``**
 
-:penguin: ── **Utilidad**
-**``ping``** **``help``** **``hex``** **``base85``** **``encrypt``** **``base64``** **``phone``** **``qr_make``** **``qr_read``** 
+:penguin: ── **Miscelaneo**
+
+**``ping``** **``help``** **``whois``** **``phone``** **``qr_make``** **``qr_read``** 
+
+:penguin: ── **Encriptado**
+
+**``hex``** **``ascii85``** **``encrypt``** **``base64``** 
 **``sha1``** **``sha256``** **``sha512``** **``md5``**
+
+:penguin: ── **Desencriptado**
+**``dhex``** **``dascii85``** **``dbase64``**
                     """    
                
                elif command != '':

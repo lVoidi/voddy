@@ -21,7 +21,7 @@ class Encrypt(commands.Cog):
           """
           try:
                bytes = data.encode("utf-8")
-               base85_bytes = base64.b85encode(bytes)
+               base85_bytes = base64.a85encode(bytes)
                base85_str = base85_bytes.decode("utf-8")
                
                bytes = base85_str.encode("utf-8")
@@ -31,8 +31,8 @@ class Encrypt(commands.Cog):
                ntext = base64_string.encode('utf-8')
                encode = ntext.hex()
                
-               if len(encode) > 2000:
-                    embed = discord.Embed().add_field(name="El resultado supera los 2000 caracteres", value="Intenta encriptarlo **por partes**")
+               if len(encode) > 1024:
+                    embed = discord.Embed().add_field(name="El resultado supera los 1024 caracteres", value="Intenta encriptarlo **por partes**")
                     embed.color = discord.Color.red()
                     await ctx.reply(embed = embed)
                     return

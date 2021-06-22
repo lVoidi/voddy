@@ -32,7 +32,8 @@ cogList = [
      "commands.utils.phone",
      "commands.utils.whois",
      "commands.utils.qr",
-     "commands.utils.info"
+     "commands.utils.info",
+     "commands.utils.find"
 ]
 
 @client.command()
@@ -42,7 +43,7 @@ async def ping(ctx : commands.Context):
 
 **Sintaxis:** **``=ping``**
      """
-     embed = Embed(title="Ping de trollencio",
+     embed = Embed(title=f"Ping de {client.user.name}",
                    description="**{0:.2f}ms**".format(client.latency*1000),color=ctx.author.color)
      
      await ctx.reply(embed=embed, mention_author=False)
@@ -56,9 +57,11 @@ if __name__ == "__main__":
      for cog in cogList:
           try:
                client.load_extension(name=cog)
-
+               print("Cargado: "+cog)
+               
           except Exception as e:
                exc = f"{type(e).__name__} : {e}"
+               print(exc)
           
 #    Carga el token del bot
      client.run(token)
