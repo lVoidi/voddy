@@ -51,7 +51,7 @@ cogList = [
 @client.command()
 async def ping(ctx : commands.Context):
      """
-*Devuelve el ping del bot*
+Devuelve el ping del bot
 
 **Sintaxis:** **``=ping``**
      """
