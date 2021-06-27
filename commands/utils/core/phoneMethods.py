@@ -71,7 +71,6 @@ class Methods:
                     'length' : 9
                },
                
-        
           }
           self.countries_list = []
           for key in self.countries.keys():

@@ -10,7 +10,8 @@ class Help(commands.Cog):
      @commands.command(
                      aliases=[
                           "ayuda",
-                          "Ayuda"
+                          "Ayuda",
+                          "h"
                      ])
      async def help(self, ctx : commands.Context, command=''):
           """
@@ -33,17 +34,22 @@ disponibles en el bot
 **Comando de ayuda de** [Voiddy](https://discord.com/api/oauth2/authorize?client_id=854166740498251777&permissions=8&scope=bot)
 **Prefix:** **``=``**
 
+:penguin: ── **diversión**
+
+**``cowsay``** 
 :penguin: ── **Miscelaneo**
 
 **``ping``** **``help``** **``whois``** **``phone``** **``qr_make``** **``qr_read``** 
-
+**``crypto``** **``proxy``** **``img``** **``findin``** **``random``** **``grep``**
+**``fancy``**
 :penguin: ── **Encriptado**
 
 **``hex``** **``ascii85``** **``encrypt``** **``base64``** 
+**``shellcode``** **``md5``**
 **``sha1``** **``sha256``** **``sha512``** **``md5``**
 
 :penguin: ── **Desencriptado**
-**``dhex``** **``dascii85``** **``dbase64``**
+**``dhex``** **``dascii85``** **``dbase64``** **``dshellcode``**
                     """    
                
                elif command != '':

@@ -29,11 +29,23 @@ cogList = [
      "commands.utils.base64",
      "commands.utils.base85",
      "commands.utils.hex",
+     "commands.utils.shellcode",
      "commands.utils.phone",
      "commands.utils.whois",
      "commands.utils.qr",
+     "commands.utils.findin",
+     "commands.utils.grep",
      "commands.utils.info",
-     "commands.utils.find"
+     "commands.utils.img",
+     "commands.utils.random",
+     "commands.utils.proxy",
+     "commands.utils.font",
+     "commands.utils.crypto.crypto",
+#   Diversión
+     "commands.fun.tux",
+
+#   Management
+     #"commands.manage.emoji",
 ]
 
 @client.command()

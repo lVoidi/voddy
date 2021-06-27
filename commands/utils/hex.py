@@ -52,7 +52,7 @@ Decodifica en hexadecimal el texto que el usuario diga
           ascii_string = bytes_object.decode("utf-8")
           
           embed = discord.Embed(
-               title=f"Codificador hexadecimal",
+               title=f"Decodificador hexadecimal",
                color=discord.Color.from_rgb(0,255,0)
           )
           

@@ -1,10 +1,19 @@
-#http://api.qrserver.com/v1/read-qr-code/?fileurl=
+from urllib.request import Request, urlopen
+from urllib.parse import quote_plus
+import re
 
-from urllib import parse, request
-from json import loads
+#imgrefurl=
 
-enc = parse.urlencode({"" : "https://media.discordapp.net/attachments/844755531049467915/855601044410728478/SPOILER_431590024559984641.png"})
+def findin(site:str, user:str):
+	url = f'https://google.com/search?q={quote_plus(f"site:{site} intext:{user}")}'
 
-response = request.urlopen("http://api.qrserver.com/v1/read-qr-code/?fileurl{}".format(enc))
-s = loads(response.read())
-print(s)
+	req = Request(url=url, headers={'User-Agent': 'Mozilla/5.0'})
+
+	response = urlopen(req)
+
+	geturls = re.findall(r'imgrefurl=(https://[\w\.\/\?\=\:\-\_]+)', response.read().decode())
+
+
+	print(geturls)
+
+findin('twitter.com', 'VoidVoidi')
