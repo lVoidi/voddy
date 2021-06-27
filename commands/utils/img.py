@@ -82,10 +82,10 @@ class Img(commands.Cog):
 				try:
 					resp = await self.bot.wait_for('message',
 						check=lambda m: m.author == ctx.author and m.content.lower() in ('n', 'b', 's',),
-						timeout=17)
+						timeout=10)
 				
 				except asyncio.TimeoutError:
-					await message.edit(content='> **se ha pasado el tiempo para reaccionar**')
+					await message.edit(content='> **se ha pasado el tiempo para escribir **n**, **b**, o **s** **')
 				
 				if resp.content == 'n':
 					page += 1

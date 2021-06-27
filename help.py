@@ -34,21 +34,21 @@ disponibles en el bot
 **Comando de ayuda de** [Voiddy](https://discord.com/api/oauth2/authorize?client_id=854166740498251777&permissions=8&scope=bot)
 **Prefix:** **``=``**
 
-:penguin: ── **diversión**
+<a:tux_programando:858807224645058581> ── **diversión**
 
 **``cowsay``** 
-:penguin: ── **Miscelaneo**
+<a:tux_programando:858807224645058581> ── **Miscelaneo**
 
 **``ping``** **``help``** **``whois``** **``phone``** **``qr_make``** **``qr_read``** 
 **``crypto``** **``proxy``** **``img``** **``findin``** **``random``** **``grep``**
-**``fancy``**
-:penguin: ── **Encriptado**
+**``fancy``** **``clone``**
+<a:tux_programando:858807224645058581> ── **Encriptado**
 
 **``hex``** **``ascii85``** **``encrypt``** **``base64``** 
 **``shellcode``** **``md5``**
-**``sha1``** **``sha256``** **``sha512``** **``md5``**
+**``sha1``** **``sha256``** **``sha512``** 
 
-:penguin: ── **Desencriptado**
+<a:tux_programando:858807224645058581> ── **Desencriptado**
 **``dhex``** **``dascii85``** **``dbase64``** **``dshellcode``**
                     """    
                
@@ -69,7 +69,7 @@ disponibles en el bot
                          embed.description = f"""
 
      No se ha logrado encontrar **``{command}``** en nuestra lista de comandos,
-     escribe thelp para ver una simple lista de comandos
+     escribe thelp para ver una simple lista de comandos <a:tux_programando:858807224645058581>
 
 
                                    """
@@ -85,7 +85,7 @@ disponibles en el bot
           except Exception as e:
                em = on_unexpected_error(e)
                
-               await ctx.reply(embed = em,
+               await ctx.reply(content="<a:tux_programando:858807224645058581>",embed = em,
                                mention_author=False)
 
      

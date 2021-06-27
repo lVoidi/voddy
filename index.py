@@ -33,6 +33,7 @@ cogList = [
      "commands.utils.phone",
      "commands.utils.whois",
      "commands.utils.qr",
+     "commands.utils.clone",
      "commands.utils.findin",
      "commands.utils.grep",
      "commands.utils.info",

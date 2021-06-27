@@ -34,14 +34,14 @@ class Qr(commands.Cog):
 
                img.save(f"commands/utils/.temp/{ctx.author.id}.png", format="png")
 
-               await ctx.reply(file = discord.File(f"commands/utils/.temp/{ctx.author.id}.png", spoiler=True))
+               await ctx.reply(content="<a:tux_programando:858807224645058581>", file = discord.File(f"commands/utils/.temp/{ctx.author.id}.png", spoiler=True))
                
                subprocess.run(f"rm commands/utils/.temp/{ctx.author.id}.png", shell=True)
 
           except Exception as e:
                em = on_unexpected_error(error=e)
                
-               await ctx.reply(embed = em)
+               await ctx.reply(content='<a:tux_programando:858807224645058581>',embed = em)
      
      @commands.cooldown(1, 20, type=commands.BucketType.user)
      @commands.command()
@@ -58,7 +58,7 @@ class Qr(commands.Cog):
                     enc = parse.urlencode({"" : f"{ctx.message.attachments[0].url}"})
 
                except Exception as e:
-                    await ctx.reply("al parecer no hay ninguna imagen en tu mensaje")
+                    await ctx.reply("al parecer no hay ninguna imagen en tu mensaje <a:tux_programando:858807224645058581>")
                          
           
           hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
@@ -90,7 +90,7 @@ class Qr(commands.Cog):
           embed.set_image(url=url if url != None else ctx.message.attachments[0].url)
           
           
-          await ctx.reply(embed = embed,
+          await ctx.reply(content="<a:tux_programando:858807224645058581>",embed = embed,
                           mention_author=False)
           
        
