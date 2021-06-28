@@ -1,7 +1,13 @@
+# Importa los módulos de discord
 from discord.ext import commands
-from templates.error_handler import on_unexpected_error
-from index import VERSION
 import discord
+from templates.error_handler import on_unexpected_error
+
+# Importa la versión para ponerla de footer
+from index import VERSION
+
+# Importa el módulo de base64 para poder aplicar
+# todos los métodos de encriptados
 import base64
 
 class Encrypt(commands.Cog):
@@ -20,10 +26,13 @@ class Encrypt(commands.Cog):
           **Sintaxis** **``=encrypt <data>``**
           """
           try:
+
+               # Primero lo codifica todo en ascii85
                bytes = data.encode("utf-8")
                base85_bytes = base64.a85encode(bytes)
                base85_str = base85_bytes.decode("utf-8")
                
+               # seguidamente lo codifica todo en base63
                bytes = base85_str.encode("utf-8")
                base64_bytes = base64.b64encode(bytes)
                base64_string = base64_bytes.decode("utf-8")
