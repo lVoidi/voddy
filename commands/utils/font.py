@@ -1,5 +1,8 @@
+# Importa todos los módulos de discord
 from discord.ext import commands
 import discord
+
+# Importa las siguientes variables del módulo string
 from string import ascii_letters, punctuation
 
 class Font(commands.Cog):
@@ -14,7 +17,7 @@ class Font(commands.Cog):
 		**Sintaxis:** **``=fancy <texto>``**
 		"""
 
-
+		# String con todos los fonts
 		string_fonts = """
 𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ1234567890
 𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅1234567890
@@ -48,28 +51,45 @@ class Font(commands.Cog):
 ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ１２３４５６７８９０
 		"""
 
+		# Guarda todo el abecedario en esta variable
 		abc = [letter for letter in f'{ascii_letters}1234567890']
+
+		# Guarda todos los fonts en una lista
 		fonts = [f for f in string_fonts.split()]
 
+		# Inicializa la variable con el texto convertido
 		txt = ''
+
+		# Itera sobre cada font
 		for font in fonts:
+
+			# Itera sobre cada letra en el texto
 			for letter in text:
+
+				# Si el texto está en el abecedario, la convierte
 				if letter in abc:
+
+					# Y agrega el texto a la variable txt
 					txt += f'{font[abc.index(f"{letter}")]}'
 
+				# Y si no esta en el abecedario como puede ser
+				# en caso de caracteres extraños, simplemente 
+				# agrega el caracter sin convertirlo
 				else:
 
 					txt += letter
 
 
-
+			# Agrega un salto de línea despues de la iteración
 			txt += '\n'
 
+		# Crea un objeto de clase embed
 		embed = discord.Embed()
 		embed.title='Diferentes fonts para esa frase'
 		embed.description = txt
 		embed.color = 0x00ff00
 
+		# Responde al  mensaje
 		await ctx.reply(embed = embed, mention_author = False)
 
 

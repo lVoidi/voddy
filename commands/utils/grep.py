@@ -13,20 +13,42 @@ class Grep(commands.Cog):
 		**Sintaxis:** **``=grep <tipo(message o user)>`**
 		"""
 
+		# Manda el primer mensaje para decirle al usuario que escriba a 
+		# continuación la cosa a filtrar
 		msg = await ctx.send("Escribe a continuación el contenido a buscar")
 
+		# Guarda el mensaje del usuario dentro de la variable content
 		content = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author)
 
+		# Borra el primer mensaje
 		await msg.delete()
 
+		# Itera sobre todos los mensajes con un alcance de 200
 		async for message in ctx.channel.history(limit=200):
+
+			# Si la id del mensaje original es diferente al mensaje del usuario
+			# con el contenido a buscar
 			if message.id != content.id:
+
+				# Si el tipo que el usuario especificó es 'message'
 				if type == 'message':
-					if content.content.lower() in message.content.lower() and message.id != content.id:
+
+					# Si el contenido concuerda
+					if content.content.lower() in message.content.lower():
+						# Responde al mensaje indicando que encontró un mensaje
+						# con el contenido dicho
 						await message.reply('‌', mention_author = False)
 						break
+
+				# En el caso de que el tipo sea user
 				elif type == 'user':
-					if content.content.lower() in str(message.author).lower() and message.id != content.id:
+
+					# Si el nombre del contenido concuerda con el autor del mensaje
+					# iterado, ejecuta el siguiente código
+					if content.content.lower() in str(message.author).lower():
+						
+						# Responde al mensaje indicando que encontró un mensaje
+						# con el contenido dicho
 						await message.reply('‌', mention_author = False)
 						break
 

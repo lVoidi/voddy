@@ -26,11 +26,15 @@ class Proxy(commands.Cog):
 		**Sintaxis:** **``=proxy <tipo> <numero de proxys>``**
 		"""
 		try:
+
 			# Revisa si el tipo de proxy es correcto
 			if type.lower() not in ['http', 'socks5', 'socks4']:
 				await ctx.reply("Ese tipo de proxy no es válido, prueba con una de las  siguientes: **http**, **socks4**, **socks5**")
 				return
 
+			if number <= 0:
+				await ctx.reply("que pa? quieres 0 proxies o que coño")
+				return
 			# Url de la api
 			url = f"https://api.proxyscrape.com/?request=displayproxies&proxytype={type.lower()}"
 
@@ -55,24 +59,43 @@ class Proxy(commands.Cog):
 			headers["Sec-Fetch-Dest"] = "document"
 			headers["Accept-Language"] = "es-ES,es;q=0.9"
 
+			# Crea el objeto de la clase Request
 			req = Request(url=url, headers=headers)
 
+			# Guarda la respuesta en  esta variable
 			response = urlopen(req)
 
+			# Inicializa la variable con las proxies
 			string_proxies = ''
+
+			# Guarda el actual valor de number en otra variable auxiliar
 			num = number
+
+			# Itera sobre todas las proxies
 			for proxy in response.read().decode().splitlines():
-				num -= 1
-				if num == 0:
+				
+				# Cuenta las iteraciones
+				
+
+				# Si es 0, rompe el bucle
+				if num <= 0:
 					break
+
+				num -= 1
+
+				# Agrega al string de proxies la proxy sobre la cual
+				# se itera
 				string_proxies += f'**``{proxy}``**\n'
 
+			# Crea el embed
 			embed = discord.Embed(title=f'{number} proxies de tipo {type}')
 			embed.color = 0xaaffaa
 			embed.description = f"{string_proxies} \n consulta la api utilizada [aquí](https://api.proxyscrape.com)"
 
+			# Responde
 			await ctx.reply(embed = embed, mention_author = False)
 
+		# En caso de un error inesperado
 		except Exception as e:
 			em = on_unexpected_error(e)
 			await ctx.reply(embed = em)
