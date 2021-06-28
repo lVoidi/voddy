@@ -30,6 +30,11 @@ class Clone(commands.Cog):
 				await ctx.reply("Y la url para clonar capo?")
 				return
 
+			# Si la url no inicia con http:// o https://
+			elif not url.startswith('http'):
+				await ctx.reply("Ponle el http/s al principio")
+				return
+
 			# Crea una instancia de la clase urllib.request.Request
 			req = Request(url=url, headers={'User-Agent': 'Mozilla/5.0'})
 

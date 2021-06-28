@@ -1,7 +1,16 @@
+# Basado en el código de https://github.com/Cuchillos/ProxyScraper
+# 
+#
+#
+# Importa los módulos de discord
 from discord.ext import commands
 import discord
+
+# Importa todo lo relacionado a requests
 from urllib.request import Request, urlopen
 from requests.structures import CaseInsensitiveDict
+
+# Template error handler
 from templates.error_handler import on_unexpected_error
 
 class Proxy(commands.Cog):
@@ -17,14 +26,22 @@ class Proxy(commands.Cog):
 		**Sintaxis:** **``=proxy <tipo> <numero de proxys>``**
 		"""
 		try:
+			# Revisa si el tipo de proxy es correcto
 			if type.lower() not in ['http', 'socks5', 'socks4']:
 				await ctx.reply("Ese tipo de proxy no es válido, prueba con una de las  siguientes: **http**, **socks4**, **socks5**")
 				return
+
+			# Url de la api
 			url = f"https://api.proxyscrape.com/?request=displayproxies&proxytype={type.lower()}"
 
+			# Si el numero es mayor a 20
 			if number > self.limit:
 				await ctx.reply(f"Tiene que ser un número menor a {self.limit}")
 				return
+
+			# Crea los headers
+			# Basado en el código de https://github.com/Cuchillos/ProxyScraper
+
 
 			headers = CaseInsensitiveDict()
 			headers["Connection"] = "keep-alive"

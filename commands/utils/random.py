@@ -1,3 +1,4 @@
+# Comando de relleno lol
 from discord.ext import commands
 import discord
 from random import randint
