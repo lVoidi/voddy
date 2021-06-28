@@ -37,15 +37,18 @@ class Encrypt(commands.Cog):
                base64_bytes = base64.b64encode(bytes)
                base64_string = base64_bytes.decode("utf-8")
                
+               # Despues codifica el código en hexadecimal
                ntext = base64_string.encode('utf-8')
                encode = ntext.hex()
                
+               # si el texto codificado quedó demasiado largo, se cancela el comando
                if len(encode) > 1024:
                     embed = discord.Embed().add_field(name="El resultado supera los 1024 caracteres", value="Intenta encriptarlo **por partes**")
                     embed.color = discord.Color.red()
                     await ctx.reply(embed = embed)
                     return
                
+
                embed = discord.Embed(
                     title=f"Encriptado de 3 capas",
                     color=ctx.message.author.color
@@ -60,14 +63,14 @@ class Encrypt(commands.Cog):
                embed.set_footer(text=f"  |  {VERSION}",
                                 icon_url=self.bot.user.avatar_url)
                
+               # Responde el mensaje
                await ctx.reply(embed = embed,
                               mention_author=False)
-               
+          
+          # En caso de un error inesperado
           except Exception as e:
                em = on_unexpected_error(e)
                await ctx.reply(embed = em)
-               
-          
-     
+
 def setup(bot):
      bot.add_cog(Encrypt(bot))
