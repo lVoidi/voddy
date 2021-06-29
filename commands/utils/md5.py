@@ -1,6 +1,8 @@
-from hashlib import md5
+# Importa todos los módulos de discord
 from discord.ext import commands
 import discord
+
+from hashlib import md5
 
 class Md5(commands.Cog):
      def __init__(self, b : commands.Bot):

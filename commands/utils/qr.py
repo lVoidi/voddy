@@ -52,13 +52,13 @@ class Qr(commands.Cog):
                img = qr.make_image(fill_color="black", back_color="white")
 
                # Guarda la imagen en formato png
-               img.save(f"commands/utils/.temp/{ctx.author.id}.png", format="png")
+               img.save(f"commands/utils/.temp/{ctx.message.id}.png", format="png")
 
                # Responde el mensaje
-               await ctx.reply(content="<a:tux_programando:858807224645058581>", file = discord.File(f"commands/utils/.temp/{ctx.author.id}.png", spoiler=True))
+               await ctx.reply(content="<a:tux_programando:858807224645058581>", file = discord.File(f"commands/utils/.temp/{ctx.message.id}.png", spoiler=True))
                
                # Borra el código qr para ahorrar espacio en memoria
-               subprocess.run(f"rm commands/utils/.temp/{ctx.author.id}.png", shell=True)
+               subprocess.run(f"rm commands/utils/.temp/{ctx.message.id}.png", shell=True)
 
           # Por si hay algún error inesperado
           except Exception as e:

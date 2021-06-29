@@ -22,7 +22,7 @@ class Findin(commands.Cog):
 
 			response = urlopen(req)
 
-			geturls = re.findall(r'imgrefurl=(https://[\w\.\/\?\=\:\-\_]+)', response.read().decode())
+			geturls = re.findall(r'href="/url\?q=([\w\.\/\?\=\:\-\_]+)', response.read().decode())
 
 			if len(geturls) == 0:
 				embed = discord.Embed()
@@ -34,7 +34,11 @@ class Findin(commands.Cog):
 				return
 
 			embed = discord.Embed(title=f'Se ha encontrado a {user} en {site}')
-			embed.description = f'Se ha encontrado [aquí]({geturls[0]}) , en la url {geturls[0]}'
+			str_urls = ''
+			for url in geturls:
+				str_urls += f'{url}\n'
+
+			embed.description = f'Se ha encontrado [aquí]({geturls[0]}) , en las siguientes urls:\n {str_urls}'
 			embed.color = 0x0000ff
 
 			await ctx.reply(embed = embed, mention_author = False)
