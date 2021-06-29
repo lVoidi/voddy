@@ -1,7 +1,13 @@
+# Importa los modulos de discord
 from discord import mentions
 from discord.ext import commands
-from index import VERSION
 import discord
+
+# Importa la version desde el index
+from index import VERSION
+
+# Importa la libreria hashlib que es la encargada
+# de crear el hash de tipo sha1
 import hashlib
 
 class Sha1(commands.Cog):
@@ -16,8 +22,15 @@ class Sha1(commands.Cog):
           
           **Sintaxis:** **``=sha1 <datos a encriptar>``**
           """
+
+          # Crea el hash de tipo sha1 con la informacion 
+          # que el usuario paso por argumentos
           hash = hashlib.sha1(data.encode("utf-8"))
+
+          # Convierte el hash en hexadecimal
           hex = hash.hexdigest()
+
+          # crea el embed
           embed=discord.Embed(color=discord.Color.green())
           
           embed.add_field(
@@ -26,6 +39,7 @@ class Sha1(commands.Cog):
                inline=False
           )
           
+          # Crea un campo con el tamagno 
           embed.add_field(
                name="Tamaño",
                value=f"**Hash** → {hash.block_size}B\n**Resultado hex** → {hash.digest_size}B",
@@ -44,6 +58,8 @@ class Sha1(commands.Cog):
           
           **Sintaxis:** **``=sha256 <datos a encriptar>``**
           """
+
+          # lo mismo que con sha1, nada mas que aqui crea el hash de tipo sha256
           hash = hashlib.sha256(data.encode("utf-8"))
           hex = hash.hexdigest()
           embed=discord.Embed(color=discord.Color.green())
@@ -91,7 +107,13 @@ class Sha1(commands.Cog):
                           mention_author=False)
      
      
-     
+     @sha1.error
+     @sha256.error 
+     @sha512.error
+     async def on_error(self, ctx, error):
+          if isinstance(error, commands.MissingRequiredArgument):
+               await ctx.reply('a ese comando le falta un parametro, el texto a convertir')
+               
 def setup(bot):
      bot.add_cog(Sha1(bot))
 

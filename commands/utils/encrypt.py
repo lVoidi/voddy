@@ -72,5 +72,10 @@ class Encrypt(commands.Cog):
                em = on_unexpected_error(e)
                await ctx.reply(embed = em)
 
+     @encrypt.error
+     async def on_error(self, ctx, error):
+          if isinstance(error, commands.MissingRequiredArgument):
+               await ctx.reply('Tienes que poner como argumento el texto a encriptar!')
+               
 def setup(bot):
      bot.add_cog(Encrypt(bot))

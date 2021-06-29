@@ -2,6 +2,7 @@
 from discord.ext import commands
 import discord
 
+# Importa el metodo md5 de hashlib
 from hashlib import md5
 
 class Md5(commands.Cog):
@@ -16,7 +17,11 @@ class Md5(commands.Cog):
           
           **Sintaxis:** **``=md5 <datos a encriptar>``**
           """
+
+          # crea el hash
           hash = md5(data.encode("utf-8"))
+
+          # lo convierte en hex
           hex = hash.hexdigest()
           embed=discord.Embed(color=discord.Color.green())
           

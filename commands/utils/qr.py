@@ -133,6 +133,10 @@ class Qr(commands.Cog):
                          embed = embed,
                          mention_author=False)
           
-       
+     @qr_make.error 
+     async def on_error(self, ctx, error):
+          if isinstance(error, commands.MissingRequiredArgument):
+               await ctx.reply('Escribe los datos para convertirlos en qr!')
+                      
 def setup(bot):
      bot.add_cog(Qr(bot))

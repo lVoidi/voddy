@@ -24,5 +24,9 @@ class Random(commands.Cog):
 
 		await ctx.reply(embed = embed, mention_author = False)
 
+	@random.error 
+	async def on_error(self, ctx, error):
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.reply('Recuerda que este comando recibe 2 argumentos, los cuales definen el rango para generar el numero aleatorio: sintaxis: **``=random <num1> <num2>``**')
 def setup(bot):
 	bot.add_cog(Random(bot))

@@ -70,5 +70,11 @@ Decodifica en hexadecimal el texto que el usuario diga
           await ctx.reply(embed = embed,
                           mention_author=False)
      
+     @hex.error 
+     @dhex.error 
+     async def on_error(self, ctx, error):
+          if isinstance(error, commands.MissingRequiredArgument):
+               await ctx.reply('Tienes que poner el contenido a cifrar o descifrar!')
+
 def setup(bot):
      bot.add_cog(Hex(bot))

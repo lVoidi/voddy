@@ -29,7 +29,11 @@ disponibles en el bot
                # Crea un objeto de tipo embed
                embed=discord.Embed()
                embed.set_thumbnail(url=self.bot.user.avatar_url)
-               embed.set_footer(text=f"{ctx.guild.name}", icon_url=ctx.guild.icon_url)
+               try:
+                    embed.set_footer(text=f"{ctx.guild.name}", icon_url=ctx.guild.icon_url)
+
+               except:
+                    pass
                embed.add_field(
                     name="Info",
                     value="[Github](https://github.com/lVoidi) \n [Telegram](https://t.me/lVoidi)",

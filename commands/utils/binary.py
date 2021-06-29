@@ -113,7 +113,11 @@ class Bin(commands.Cog):
 			em = on_unexpected_error(e)
 			await ctx.reply(embed = em)
 
-
+	@bin.error
+	@dbin.error 
+	async def on_error(self, ctx, error):
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.reply('Por favor, introduce los **datos necesarios** a convertir!')
 
 def setup(bot):
 	bot.add_cog(Bin(bot))

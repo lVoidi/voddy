@@ -92,6 +92,10 @@ class Font(commands.Cog):
 		# Responde al  mensaje
 		await ctx.reply(embed = embed, mention_author = False)
 
+	@fancy.error
+	async def on_error(self, ctx, error):
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.reply('Este comando recibe un argumento, el texto a convertir! ')
 
 def setup(bot):
 	bot.add_cog(Font(bot))

@@ -124,5 +124,12 @@ Decodifica de shellcode el texto que el usuario diga
           await ctx.reply(embed = embed,
                           mention_author=False)
      
+     @shellcode.error 
+     @dshellcode.error
+     async def on_error(self, ctx, error):
+          if isinstance(error, commands.MissingRequiredArgument):
+               await ctx.reply('a ese comando le falta un parametro, el texto a cifrar/descifrar')
+
+               
 def setup(bot):
      bot.add_cog(Shellcode(bot))

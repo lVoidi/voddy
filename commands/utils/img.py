@@ -119,5 +119,10 @@ class Img(commands.Cog):
 
 			await ctx.reply(embed = e)
 
+	@img.error
+	async def on_error(self, ctx, error):
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.reply('Tienes que poner que imagen quieres buscar')
+
 def setup(bot):
 	bot.add_cog(Img(bot))

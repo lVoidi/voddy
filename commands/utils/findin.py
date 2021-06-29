@@ -36,7 +36,7 @@ class Findin(commands.Cog):
 			embed = discord.Embed(title=f'Se ha encontrado a {user} en {site}')
 			str_urls = ''
 			for url in geturls:
-				str_urls += f'{url}\n'
+				str_urls += f'{url}\n' if 'google' not in url else ''
 
 			embed.description = f'Se ha encontrado [aquí]({geturls[0]}) , en las siguientes urls:\n {str_urls}'
 			embed.color = 0x0000ff

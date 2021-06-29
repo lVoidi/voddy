@@ -16,19 +16,19 @@ from templates.error_handler import on_unexpected_error
 class Proxy(commands.Cog):
 	def __init__(self, bot : commands.Bot):
 		self.bot = bot
-		self.limit = 20
+		self.limit = 40
 
 	@commands.command()
 	async def proxy(self, ctx, type:str, number:int):
 		"""
-		Consigue proxies del tipo que quieras, ya sea http, socks4 o socks5
+		Consigue proxies del tipo que quieras, ya sea http, https, socks4 o socks5
 
 		**Sintaxis:** **``=proxy <tipo> <numero de proxys>``**
 		"""
 		try:
 
 			# Revisa si el tipo de proxy es correcto
-			if type.lower() not in ['http', 'socks5', 'socks4']:
+			if type.lower() not in ['http', 'https', 'socks5', 'socks4']:
 				await ctx.reply("Ese tipo de proxy no es válido, prueba con una de las  siguientes: **http**, **socks4**, **socks5**")
 				return
 
@@ -38,7 +38,7 @@ class Proxy(commands.Cog):
 			# Url de la api
 			url = f"https://api.proxyscrape.com/?request=displayproxies&proxytype={type.lower()}"
 
-			# Si el numero es mayor a 20
+			# Si el numero es mayor a 40
 			if number > self.limit:
 				await ctx.reply(f"Tiene que ser un número menor a {self.limit}")
 				return
@@ -74,13 +74,11 @@ class Proxy(commands.Cog):
 			# Itera sobre todas las proxies
 			for proxy in response.read().decode().splitlines():
 				
-				# Cuenta las iteraciones
-				
-
 				# Si es 0, rompe el bucle
 				if num <= 0:
 					break
 
+				# Cuenta las iteraciones
 				num -= 1
 
 				# Agrega al string de proxies la proxy sobre la cual

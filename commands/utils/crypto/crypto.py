@@ -1,13 +1,19 @@
+# Importa los modulos de discord
 from discord.ext import commands
-from templates.error_handler import on_unexpected_error
-from commands.utils.crypto.scrapper import get_info
 import discord
-import cryptocompare
 
+# Imporat el error handler
+from templates.error_handler import on_unexpected_error
+
+# Importa el metodo correspondiente
+from commands.utils.crypto.scrapper import get_info
+
+# Inicializa la clase de las crypto
 class Crypto(commands.Cog):
   def __init__(self, bot : commands.Bot):
     self.bot = bot
   
+  # cooldown de 10 segundos
   @commands.cooldown(1, 10, commands.BucketType.user)
   @commands.command()
   async def crypto(self, ctx : commands.Context, cryptoname : str):
@@ -17,12 +23,16 @@ class Crypto(commands.Cog):
     **Sintaxis:** **``=crypto <cryptomoneda>``**
     """
     try:
+
+      # usa el metodo para sacar informacion
       dict_info = get_info(crypto=cryptoname)
       
+      # cryptocompare retorna Nonetype si no ha encontrado la criptomoneda
       if dict_info == None:
         await ctx.reply('Vaya, esa crypto no la reconozco, podrías ser tan amable de poner un simbolo valido?')
         return
       
+      # crea el embed
       embed = discord.Embed()
       
       embed.title = f"Precio actual de **{cryptoname}**"
@@ -33,9 +43,11 @@ Precio mas alto en 24hrs → **{dict_info['high']}**$
 Precio actual → **{dict_info['actual']}**$ 
       '''
       
+      # Responde el mensaje
       await ctx.reply(embed = embed,
                       mention_author = False)
 
+    # En caso de un error inesperado
     except Exception as e:
       em = on_unexpected_error(e)
       

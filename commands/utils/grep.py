@@ -52,6 +52,10 @@ class Grep(commands.Cog):
 						await message.reply('‌', mention_author = False)
 						break
 
+	@grep.error
+	async def on_error(self, ctx, error):
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.reply('Tienes que poner el tipo a filtrar! **``=grep <user/message>``**')
 
 def setup(bot):
 	bot.add_cog(Grep(bot))
