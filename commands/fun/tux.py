@@ -1,7 +1,9 @@
-from subprocess import check_output
-import subprocess
+# Importa los modulos necesarios de discord
 from discord.ext import commands
 import discord
+
+# Importa los metodos necesarios de subprocess
+from subprocess import check_output
 
 class Cowsay(commands.Cog):
 	def __init__(self, bot : commands.Bot):
@@ -50,6 +52,11 @@ elephant           meow               stimpy
 ```
 			''', mention_author = False)
 
+
+	@cowsay.error
+	async def on_error(self, ctx, error):
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.reply('Por favor, pon el texto necesario para que el comando funcione correctamente')
 
 def setup(bot):
 	bot.add_cog(Cowsay(bot))
