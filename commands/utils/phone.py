@@ -105,5 +105,8 @@ Genera números de telefonos de distintos paises
           if isinstance(error, commands.MissingRequiredArgument):
                await ctx.reply('te falta poner el pais del cual quieres generar numeros')
 
+          
+
+
 def setup(bot):
      bot.add_cog(Phone(bot))

@@ -5,6 +5,9 @@ import discord
 # Importa la funcion que maneja los errores inesperados
 from templates.error_handler import on_unexpected_error
 
+# Importa la version desde el index
+from index import VERSION
+
 # Inicializa la clase y hereda los métodos de la clase
 # discord.ext.commands.Cog 
 class Help(commands.Cog):
@@ -30,7 +33,7 @@ disponibles en el bot
                embed=discord.Embed()
                embed.set_thumbnail(url=self.bot.user.avatar_url)
                try:
-                    embed.set_footer(text=f"{ctx.guild.name}", icon_url=ctx.guild.icon_url)
+                    embed.set_footer(text=f"{ctx.guild.name} || v{VERSION}", icon_url=ctx.guild.icon_url)
 
                except:
                     pass
@@ -46,6 +49,7 @@ disponibles en el bot
                     embed.description = """
 **Comando de ayuda de** [Voiddy](https://discord.com/api/oauth2/authorize?client_id=854166740498251777&permissions=8&scope=bot)
 **Prefix:** **``=``**
+Escribe **``=h <comando>``** para ver **ayuda detallada** sobre un comando!
 
 <a:tux_programando:858807224645058581> ── **diversión**
 

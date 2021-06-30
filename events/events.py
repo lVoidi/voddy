@@ -2,6 +2,7 @@
 
 # Importa los módulos de discord necesario
 from discord.ext import commands
+from index import VERSION
 import discord
 
 # Template
@@ -46,67 +47,49 @@ Cambia su estado a "jugando a x servers | thelp"
           elif isinstance(error, commands.BadArgument):
                await ctx.reply('Ese comando no recibe ese tipo de argumentos')
 
-          elif isinstance(error, commands.MissingRequiredArgument):
-               await ctx.reply('Al comando le falta un argumento! escribe ``=h <comando>`` para ver los argumentos que ocupa!')
-          
           elif isinstance(error, commands.CommandNotFound):
                try:
-
-                    message_content = str(ctx.message.content)
-                    hashmap_coincidences = {}
-                    for command in self.bot.commands:
-                         hashmap_coincidences[command.name] = 0
-                         for letter in command.name:
-                              if letter in message_content.replace('=', ''):
-                                   hashmap_coincidences[command.name] += 1
-
-                    most_congruent_name = ''
-                    list_num_coincidences = [hashmap_coincidences[key] for key in hashmap_coincidences.keys() if hashmap_coincidences[key] != 0 and hashmap_coincidences[key] > len(message_content.replace('=', ''))//2]
+                    wrong_command = str(ctx.message.content).replace('=', '')
+                    embed = discord.Embed(color=0xFFAAAB)
+                    embed.description = '**No se ha encontrado un comando con ese nombre**'
                     
-                    list_iter_changes = []
-                    for key in hashmap_coincidences.keys():    
+                    coincidences = {}
+                    aproximate_names = ''
 
-                         if hashmap_coincidences[key] > sorted(list_num_coincidences, reverse=True)[0]:
-                              congruent_name = list(hashmap_coincidences.keys())[list(hashmap_coincidences.values()).index(list_num_coincidences[0])]
-                              for name in hashmap_coincidences.keys():
-                                   if str(name).startswith(congruent_name) or name in str(congruent_name):
-                                        most_congruent_name += f'{name}\n'
-                                        
+                    for command in self.bot.commands:
+                         coincidences[command.name] = 0
 
-                         try:
-                              if list_num_coincidences[0] > list_num_coincidences[1]:
+                         for letter in str(command.name):
+                              if letter in wrong_command:
+                                   coincidences[command.name] += 1
 
-                                   del list_num_coincidences[1]
-
-
-                              else:
-                                   if list_num_coincidences[1] == list_num_coincidences[0]:
-                                        pass
-
-                                   else:
-                                        del list_num_coincidences[0]
-                         except IndexError:
-                              break
+                         if coincidences[command.name] in range(len(wrong_command)-(len(wrong_command)-1), len(wrong_command)//2):
+                              del coincidences[command.name]
 
                          else:
-                              most_congruent_name = f'{list(hashmap_coincidences.keys())[list(hashmap_coincidences.values()).index(list_num_coincidences[0])]}\n'
-                              break
+                              if coincidences[command.name] > len(wrong_command)//2 and str(command.name).startswith(wrong_command) == False:
+                                   aproximate_names += f'**``{command.name}``**\n'
 
-                         list_iter_changes.append(len(list_num_coincidences))
-
-                         if len(list_iter_changes) > 3:
-                              if list_iter_changes[len(list_iter_changes)-1] == list_iter_changes[len(list_iter_changes)-2] and list_iter_changes[len(list_iter_changes)-2] == list_iter_changes[len(list_iter_changes)-3]:
+                              elif str(command.name).startswith(wrong_command):
+                                   aproximate_names += f'**``{command.name}``**\n'
                                    break
 
-                    embed = discord.Embed(color=0xFF0033)
-                    embed.description = 'No se ha encontrado ese comando'
+                         
+
+                    del coincidences
 
                     embed.add_field(
-                         name='Quiziste decir...',
-                         value=f'**``{most_congruent_name}``?**'
+                         name='Aproximados',
+                         value=aproximate_names
                     )
 
-                    await ctx.reply(embed = embed)
+                         
+
+                    embed.set_footer(text=f' | Este aproximado puede ser poco acertado || {VERSION}',
+                         icon_url=self.bot.user.avatar_url
+                    )
+
+                    await ctx.reply(embed = embed) 
 
                except Exception as e:
                     embed = on_unexpected_error(e)

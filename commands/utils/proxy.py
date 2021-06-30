@@ -98,6 +98,11 @@ class Proxy(commands.Cog):
 			em = on_unexpected_error(e)
 			await ctx.reply(embed = em)
 
+	@proxy.error
+	async def on_error(self, ctx:commands.Context, error):
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.reply('Al comando le faltan argumentos! recuerda que el comando recibe como parametros el **tipo** ***(http, https, socks4, socks5)*** y el numero de proxies **(maximo:40)**')
+
 def setup(bot):
 	bot.add_cog(Proxy(bot))
 
