@@ -1,11 +1,14 @@
-from discord import Embed 
-import sys, os
+import os
+import sys
+
+from discord import Embed
+
 
 def on_unexpected_error(error) -> Embed:
-     exc_type, exc_obj, exc_tb = sys.exc_info()
-     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
 
-     stringInfo = f"""
+    stringInfo = f"""
 ```json
 
 Ha ocurrido un error inesperado
@@ -17,18 +20,14 @@ Error: {error}
 
 ```
      """
-     
-     em = Embed().add_field(name="Error inesperado, notificar al creador!",value=stringInfo).add_field(
-          name="__Contacto__",
-          value="""
+
+    em = Embed().add_field(name="Error inesperado, notificar al creador!", value=stringInfo).add_field(
+        name="__Contacto__",
+        value="""
 Discord:       lVoid#6969
 [Twitter](https://twitter.com/VoidVoidi)
 [Telegram](https://t.me/lVoidi)
           """
-     )
-     
-     return em
+    )
 
-
-     
-     
+    return em

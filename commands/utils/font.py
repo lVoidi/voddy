@@ -1,28 +1,29 @@
 # Importa todos los módulos de discord
-from discord.ext import commands
-import discord
-
 # Importa las siguientes variables del módulo string
-from string import ascii_letters, punctuation
+from string import ascii_letters
+
+import discord
+from discord.ext import commands
 
 # Templates
 from templates.error_handler import on_unexpected_error
 
+
 class Font(commands.Cog):
-	def __init__(self, bot:commands.Bot):
-		self.bot = bot
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
 
-	@commands.command()
-	async def fancy(self, ctx:commands.Context, *, text:str):
-		"""
-		Devuelve el texto dicho en muchos fonts difer entes
+    @commands.command()
+    async def fancy(self, ctx: commands.Context, *, text: str):
+        """
+        Devuelve el texto dicho en muchos fonts difer entes
 
-		**Sintaxis:** **``=fancy <texto>``**
-		"""
+        **Sintaxis:** **``=fancy <texto>``**
+        """
 
-		# String con todos los fonts
-		try:
-			string_fonts = """
+        # String con todos los fonts
+        try:
+            string_fonts = """
 𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ1234567890
 𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅1234567890
 𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩1234567890
@@ -55,58 +56,59 @@ class Font(commands.Cog):
 ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ１２３４５６７８９０
 		"""
 
-			# Guarda todo el abecedario en esta variable
-			abc = [letter for letter in f'{ascii_letters}1234567890']
+            # Guarda todo el abecedario en esta variable
+            abc = [letter for letter in f'{ascii_letters}1234567890']
 
-			# Guarda todos los fonts en una lista
-			fonts = [f for f in string_fonts.split()]
+            # Guarda todos los fonts en una lista
+            fonts = [f for f in string_fonts.split()]
 
-			# Inicializa la variable con el texto convertido
-			txt = ''
+            # Inicializa la variable con el texto convertido
+            txt = ''
 
-			# Itera sobre cada font
-			for font in fonts:
+            # Itera sobre cada font
+            for font in fonts:
 
-				# Itera sobre cada letra en el texto
-				for letter in text:
+                # Itera sobre cada letra en el texto
+                for letter in text:
 
-					# Si el texto está en el abecedario, la convierte
-					if letter in abc:
+                    # Si el texto está en el abecedario, la convierte
+                    if letter in abc:
 
-						# Y agrega el texto a la variable txt
-						try:
-							txt += f'{font[abc.index(f"{letter}")]}'
+                        # Y agrega el texto a la variable txt
+                        try:
+                            txt += f'{font[abc.index(f"{letter}")]}'
 
-						except IndexError:
-							txt += letter
-					# Y si no esta en el abecedario como puede ser
-					# en caso de caracteres extraños, simplemente 
-					# agrega el caracter sin convertirlo
-					else:
+                        except IndexError:
+                            txt += letter
+                    # Y si no esta en el abecedario como puede ser
+                    # en caso de caracteres extraños, simplemente
+                    # agrega el caracter sin convertirlo
+                    else:
 
-						txt += letter
+                        txt += letter
 
+                # Agrega un salto de línea despues de la iteración
+                txt += '\n'
 
-				# Agrega un salto de línea despues de la iteración
-				txt += '\n'
+            # Crea un objeto de clase embed
+            embed = discord.Embed()
+            embed.title = 'Diferentes fonts para esa frase'
+            if len(txt) > 2000:
+                await ctx.reply('El texto resultante es muy largo')
+            embed.description = txt
+            embed.color = 0x00ff00
 
-			# Crea un objeto de clase embed
-			embed = discord.Embed()
-			embed.title='Diferentes fonts para esa frase'
-			if len(txt) > 2000:
-				await ctx.reply('El texto resultante es muy largo')
-			embed.description = txt
-			embed.color = 0x00ff00
+            # Responde al  mensaje
+            await ctx.reply(embed=embed, mention_author=False)
 
-			# Responde al  mensaje
-			await ctx.reply(embed = embed, mention_author = False)
+        except Exception as e:
+            await ctx.reply(embed=on_unexpected_error(e))
 
-		except Exception as e:
-			await ctx.reply(embed = on_unexpected_error(e))
-	@fancy.error
-	async def on_error(self, ctx, error):
-		if isinstance(error, commands.MissingRequiredArgument):
-			await ctx.reply('Este comando recibe un argumento, el texto a convertir! ')
+    @fancy.error
+    async def on_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.reply('Este comando recibe un argumento, el texto a convertir! ')
+
 
 def setup(bot):
-	bot.add_cog(Font(bot))
+    bot.add_cog(Font(bot))

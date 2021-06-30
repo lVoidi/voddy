@@ -1,23 +1,22 @@
 # Importa los modulos necesarios de discord
-from discord.ext import commands
-import discord
-
 # Importa los metodos necesarios de subprocess
 from subprocess import check_output
 
+from discord.ext import commands
+
+
 class Cowsay(commands.Cog):
-	def __init__(self, bot : commands.Bot):
-		self.bot = bot 
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
 
-	@commands.command()
-	async def cowsay(self, ctx, *, text:str):
-		"""
-		Comando cowsay de linux
-		**Sintaxis:** **``=cowsay <texto>``**
-		"""
+    @commands.command()
+    async def cowsay(self, ctx, *, text: str):
+        """
+        Comando cowsay de linux
+        **Sintaxis:** **``=cowsay <texto>``**
+        """
 
-
-		msg = await ctx.reply('''
+        msg = await ctx.reply('''
 Escoje entre uno de los siguientes personajes:
 ```
 beavis.zen         elephant-in-snake  milk               supermilker
@@ -35,28 +34,28 @@ elephant           meow               stimpy
 ```
 			''')
 
-		choice = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author)
+        choice = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author)
 
-		try:
-			stdout = check_output(['cowsay', '-f', choice.content.lower(), f'{text}'])
-			output = stdout.decode('utf-8')
-			await msg.delete()
-			await choice.delete()
-		except:
-			await choice.reply('pero ctm te dije que uno de los personajes que estaban ahi')
-			return
+        try:
+            stdout = check_output(['cowsay', '-f', choice.content.lower(), f'{text}'])
+            output = stdout.decode('utf-8')
+            await msg.delete()
+            await choice.delete()
+        except:
+            await choice.reply('pero ctm te dije que uno de los personajes que estaban ahi')
+            return
 
-		await ctx.reply(f'''
+        await ctx.reply(f'''
 ```
 {output}
 ```
-			''', mention_author = False)
+			''', mention_author=False)
 
+    @cowsay.error
+    async def on_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.reply('Por favor, pon el texto necesario para que el comando funcione correctamente')
 
-	@cowsay.error
-	async def on_error(self, ctx, error):
-		if isinstance(error, commands.MissingRequiredArgument):
-			await ctx.reply('Por favor, pon el texto necesario para que el comando funcione correctamente')
 
 def setup(bot):
-	bot.add_cog(Cowsay(bot))
+    bot.add_cog(Cowsay(bot))
