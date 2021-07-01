@@ -93,8 +93,9 @@ class Font(commands.Cog):
             # Crea un objeto de clase embed
             embed = discord.Embed()
             embed.title = 'Diferentes fonts para esa frase'
-            if len(txt) > 2000:
+            if len(txt) > 2020:
                 await ctx.reply('El texto resultante es muy largo')
+                return
             embed.description = txt
             embed.color = 0x00ff00
 

@@ -79,12 +79,19 @@ Cambia su estado a "jugando a x servers | thelp"
 
                 del coincidences
 
-                embed.add_field(
-                    name='Aproximados',
-                    value=aproximate_names
-                )
+                if len(aproximate_names) < 1:
+                    embed.add_field(
+                        name='Aproximados',
+                        value=f'No se ha encontrado nada parecido'
+                    )
 
-                embed.set_footer(text=f' | Este aproximado puede ser poco acertado || {VERSION}',
+                else:
+                    embed.add_field(
+                        name='Aproximados',
+                        value=aproximate_names
+                    )
+
+                embed.set_footer(text=f' | Este aproximado puede ser poco acertado || v{VERSION}',
                                  icon_url=self.bot.user.avatar_url
                                  )
 

@@ -32,7 +32,7 @@ class Encrypt(commands.Cog):
             base85_bytes = base64.a85encode(bytes)
             base85_str = base85_bytes.decode("utf-8")
 
-            # seguidamente lo codifica todo en base63
+            # seguidamente lo codifica todo en base64
             bytes = base85_str.encode("utf-8")
             base64_bytes = base64.b64encode(bytes)
             base64_string = base64_bytes.decode("utf-8")
