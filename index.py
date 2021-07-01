@@ -48,7 +48,7 @@ from webserver import keep_alive
 # Abre el archivo con las configuraciones del bot
 token = environ["TOKEN"]
 prefix = commands.when_mentioned_or('=')
-VERSION = '1.0.2'
+VERSION = '1.0.3'
 
 # Los intents para poder usar más comandos
 it = Intents().all()

@@ -16,21 +16,14 @@ class Cowsay(commands.Cog):
         **Sintaxis:** **``=cowsay <texto>``**
         """
 
-        msg = await ctx.reply('''
+        str_chars = ''
+        for char in ['beavis', 'cheese', 'daemon', 'cow', 'dragon', 'ghostbusters', 'kitty', 'meow', 'milk', 'pig', 'stegosaurus', 'stimpy', 'trex', 'turkey', 'turtle', 'tux']:
+          str_chars += f'{char}\n'
+        
+        msg = await ctx.reply(f'''
 Escoje entre uno de los siguientes personajes:
 ```
-beavis.zen         elephant-in-snake  milk               supermilker
-blowfish           eyes               moofasa            surgery
-bong               flaming-sheep      moose              telebears
-bud-frogs          ghostbusters       mutilated          three-eyes
-bunny              head-in            ren                turkey
-cheese             hellokitty         satanic            turtle
-cower              kiss               sheep              tux
-daemon             kitty              skeleton           udder
-default            koala              small              vader
-dragon             kosh               sodomized          vader-koala
-dragon-and-cow     luke-koala         stegosaurus        www
-elephant           meow               stimpy
+{str_chars}
 ```
 			''')
 
