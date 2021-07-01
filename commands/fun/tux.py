@@ -3,7 +3,7 @@
 from subprocess import check_output
 
 from discord.ext import commands
-
+import cowsay
 
 class Cowsay(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -37,8 +37,8 @@ elephant           meow               stimpy
         choice = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author)
 
         try:
-            stdout = check_output(['cowsay', '-f', choice.content.lower(), f'{text}'])
-            output = stdout.decode('utf-8')
+            output = cowsay.get_output_string(choice.content.lower(),f'{text}')
+
             await msg.delete()
             await choice.delete()
         except:
