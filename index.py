@@ -37,12 +37,18 @@ from discord import Embed, Intents
 # usar varias instancias de éste (Context, Bot)
 from discord.ext import commands
 
+# Se importa os para acceder al env secret
+from os import environ
+
+# Importamos desde webserver el keep_alive para poder
+# mantener el bot 24 horas
+from webserver import keep_alive
+
+
 # Abre el archivo con las configuraciones del bot
-with open("bot.json") as bot_info:
-    bot = load(bot_info)
-    token = bot["TOKEN"]
-    prefix = commands.when_mentioned_or(bot["PREFIX"])
-    VERSION = bot["VERSION"]
+token = environ["TOKEN"]
+prefix = commands.when_mentioned_or('=')
+VERSION = '1.0.2'
 
 # Los intents para poder usar más comandos
 it = Intents().all()
@@ -126,6 +132,9 @@ if __name__ == "__main__":
 
             # Imprime el errror
             print(exc)
+
+    # Mantiene encendido el bot
+    keep_alive()
 
     #    Carga el token del bot
     client.run(token)
